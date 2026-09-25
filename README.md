@@ -19,7 +19,7 @@ Prérequis : Python 3 avec Jupyter, un JDK (`javac -version`), un navigateur.
 
 ### 01-python/ingestion.ipynb
 
-1. """'1:33.996' -> 93.996 (float, arrondi à 3 décimales).
+1. '1:33.996' -> 93.996 (float, arrondi à 3 décimales).
 Une chaîne vide ou ne contenant que des espaces est censée retourner None.
 Pour cette condition, j’ai utilisé la méthode strip, qui retire les espaces au début et à la fin de la variable texte. Ainsi, si la chaîne est vide ou ne contient que des espaces, le résultat de strip sera forcément une chaîne vide. Ensuite, j’ai créé une variable split en utilisant la méthode split, basée sur le caractère ":", afin de diviser la chaîne en deux parties. J’ai ensuite créé les variables minutes et secondes, auxquelles j’ai affecté chaque morceau grâce à l’indexation (split[0] et split[1]). Étant donné qu’une minute équivaut à 60 secondes, j’ai effectué le calcul en convertissant les minutes en entier, puis en multipliant par 60, avant d’ajouter les secondes converties en float.
 
