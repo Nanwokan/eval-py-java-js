@@ -17,7 +17,7 @@ Prérequis : Python 3 avec Jupyter, un JDK (`javac -version`), un navigateur.
 
 ## Processus
 
-### 01-python/ingestion.ipynb
+### Maillon 1 — Python (notebook)
 
 1. '1:33.996' -> 93.996 (float, arrondi à 3 décimales).
 Une chaîne vide ou ne contenant que des espaces est censée retourner None.
@@ -30,10 +30,12 @@ Pour ouvrir et lire le fichier CSV, j’ai utilisé with open, auquel j’ai pas
 Pour écrire le contrat 1, j’ai également utilisé with open, qui permet de manipuler un fichier. La procédure est la même que pour la lecture, à la différence que cette fois j’ai utilisé le mode 'w' au lieu de 'r'. Le mode 'w' permet d’écrire dans le fichier en écrasant les anciennes données, contrairement au mode 'a' qui ajoute du contenu à la suite. J’ai donc écrit la ligne d’en‑tête avec f.write, sans oublier le retour à la ligne \n à la fin de la chaîne de caractères. Ensuite, pour chaque ligne, j’ai attribué à chaque variable la chaîne de caractères correspondante. Avec un if, j’ai vérifié si temps_tour était None. Si oui, je retourne une chaîne vide ; sinon, je formate le temps avec trois décimales grâce à f"{temps_tour:.3f}". Enfin, j’écris chaque ligne à la suite de l’en‑tête avec : f.write(f"{course};{pilote};{ecurie};{position};....\n)
 
 
-### 02-java/src/ 
+### Maillon 2 — Java
 
 1. pointsPourPosition(position) : points marqués pour cette position.
-jai utiliser un switch case pour gerer les position de 1 a 10. avec 0 par defaut.
+un switch case pour gerer les positions de 1 a 10. (trop long)
+
+J'ai utilisé if pour vérifier si la position est dans l'intervale [1 ; 10] si faux il retourne 0. si vrai il retourne la valeur a l'index "position - 1". dans le tableau BAREME contient 10 element donc l'indexation va de 0 a 9. Pour BAREME[10 - 1] => BAREME[9] donc la valeur 1. Pour BAREME[5 - 1] => BAREME[4] donc la valeur 10.
 
 2. classementPilotes(lignes)
 
@@ -43,10 +45,24 @@ jai utiliser un switch case pour gerer les position de 1 a 10. avec 0 par defaut
 
 
 
-### 03-js/ 
+### Maillon 3 — JavaScript
 
 1. trierParPoints(liste) : renvoie une NOUVELLE liste triée par points
 
 La liste reçue ne doit pas être modifiée. J’ai donc créé une copie de cette liste dans la variable copie grâce à l’opérateur spread : const copie = [...liste]. Ensuite, j’ai utilisé la méthode .sort() pour trier cette copie. La fonction de comparaison permet d’ordonner les éléments selon les points décroissants. il verifie d'abord l'inegalite de point et en cas d’égalité de points une seconde condition les départage en fonction du nombre de victoires.
 
 2. remplirTableau(idCorps, liste) : remplit le <tbody> dont l'id est fourni.
+
+Avec getElementById, j’ai cherché dans mon fichier l’élément qui a pour id idCorps. J’ai utilisé la méthode forEach pour parcourir chaque élément de liste, initialisé tr pour créer chacune de mes lignes avec document.createElement("tr"). J’ai fait pareil pour chacune de mes cellules du tableau avec document.createElement("td"), puis j’ai utilisé textContent pour mettre les informations dans les cellules.
+
+Pour l’écurie, j’ai fait :
+const ecurie = document.createElement("td");
+ecurie.textContent = element.ecurie || "";
+
+Le || "" permet de mettre une chaîne vide si l’écurie est absente.
+Ensuite, j’ai utilisé appendChild pour ajouter chacune de mes cellules à la ligne tr, puis j’ai ajouté la ligne tr au corps du tableau. Sans les appendChild, les éléments seraient bien créés en JavaScript, mais ils ne seraient pas ajoutés dans le tableau HTML, donc ils ne s’afficheraient pas.
+
+3. marquerPodium(idCorps) : ajoute la classe CSS "podium" aux TROIS PREMIÈRES lignes du tableau, et la retire de toutes les autres.
+
+Avec getElementById et querySelectorAll("tr"), j’ai cherché dans mon fichier l’élément qui a pour id idCorps et récupéré toutes les lignes tr qui se trouvent dans le corps de mon tableau. J’ai utilisé for pour parcourir chacune de mes lignes et récupéré l'index. Avec if (i < 3), je vérifie si la ligne fait partie des trois premières. Comme les index commencent à 0, les trois premières lignes ont les index 0, 1 et 2.
+Si la ligne fait partie des trois premières, j’utilise classList.add("podium") pour lui ajouter la classe CSS podium, sinon, classList.remove("podium") pour retirer la classe podium.
