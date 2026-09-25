@@ -7,6 +7,7 @@
        java -Dstdout.encoding=UTF-8 -cp out Main      (la production)
    ========================================================================= */
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Classement {
@@ -42,8 +43,16 @@ public class Classement {
     //    ses victoires (position 1) et ses 2e places, trié par :
     //    points décroissants, puis victoires, puis 2e places, puis nom (A→Z).
     public static List<Resultat> classementPilotes(List<Ligne> lignes) {
-        // À COMPLÉTER
-        return null;
+    	
+    	List<Resultat> resultats = new ArrayList<>();
+    	
+        for (Ligne ligne : lignes) {
+        	if (ligne  ) {
+        		
+        	}
+        }
+        
+        return resultats;
     }
 
     // 3. classementEcuries(pilotes) : additionne les points, victoires et
